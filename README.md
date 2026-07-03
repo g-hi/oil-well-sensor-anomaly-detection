@@ -59,15 +59,24 @@ python -m src.pipeline --dataset path/to/dataset_root --output-dir outputs
 - Place your dataset locally and point the script to it.
 - Model outputs and evaluation reports are saved to the output directory.
 
-## Interview talking points
+## Engineering focus
 
-- This project shows end-to-end machine learning work, not only model training.
-- It highlights practical thinking around industrial monitoring and operational alerts.
-- It demonstrates how data science can be connected to real-world decision support.
+This is a practical anomaly-detection pipeline that connects sensor data processing, model training, alert generation, and explainability.
 
-## Next steps
+Key engineering aspects include:
 
-- Add a more detailed notebook walkthrough
-- Compare Random Forest with gradient boosting or temporal models
-- Add explainability tools such as SHAP and feature-importance plots
+- Treating each well file as a separate time-series instance to avoid data leakage
+- Creating lag and rolling-window features to capture temporal behavior
+- Using fold-based evaluation instead of random row splitting
+- Tuning the decision threshold to balance false alarms and missed abnormal events
+- Adding persistent alert logic to reduce noisy single-point alerts
+- Using feature importance and SHAP to explain which sensor patterns contributed to abnormal predictions
 
+## Future improvements
+
+- Compare the Random Forest baseline with XGBoost or LightGBM
+- Add sequence-based models such as LSTM, GRU, or temporal CNNs
+- Package the trained model behind a FastAPI inference endpoint
+- Add a simple dashboard for visualizing abnormal probability and alert status over time
+- Add monitoring for data drift, missing sensors, and model performance degradation
+- Extend the binary normal-vs-abnormal task into multiclass event classification
