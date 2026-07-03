@@ -1,0 +1,3 @@
+Sample report summary:
+This repository includes a reproducible workflow for anomaly detection in oil well time-series data.
+The current example demonstrates the structure of the evaluation and alerting outputs.

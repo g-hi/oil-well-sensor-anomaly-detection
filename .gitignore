@@ -1,0 +1,26 @@
+# Data files
+*.zip
+*.csv
+
+# Model artifacts
+*.joblib
+*.pkl
+*.h5
+*.pt
+*.pth
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+.venv/
+venv/
+
+# System files
+.DS_Store
+Thumbs.db
