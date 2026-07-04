@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from src.generate_sample_reports import generate_sample_reports
 from src.pipeline import build_features, load_dataset
 
 
@@ -34,3 +35,10 @@ def test_load_dataset_requires_existing_path():
         pass
     else:
         raise AssertionError("Expected FileNotFoundError")
+
+
+def test_generate_sample_reports_includes_shap_and_feature_importance_figures(tmp_path):
+    generate_sample_reports(tmp_path)
+
+    assert (tmp_path / "feature_importance.png").exists()
+    assert (tmp_path / "shap_summary.png").exists()

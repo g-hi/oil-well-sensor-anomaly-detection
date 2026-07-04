@@ -40,6 +40,29 @@ def generate_sample_reports(output_dir: str | Path | None = None) -> None:
     fig.savefig(output_dir / "sample_alert_timeline.png", dpi=200)
     plt.close(fig)
 
+    feature_importance_values = pd.Series([0.35, 0.24, 0.18, 0.12, 0.11], index=["P-PDG", "T-TPT", "P-TPT", "QGL", "T-JUS-CKP"])
+    fig, ax = plt.subplots(figsize=(6, 4))
+    feature_importance_values.sort_values().plot(kind="barh", color="#54A24B", ax=ax)
+    ax.set_title("Feature Importance")
+    ax.set_xlabel("Relative Importance")
+    plt.tight_layout()
+    fig.savefig(output_dir / "feature_importance.png", dpi=200)
+    plt.close(fig)
+
+    shap_values = pd.DataFrame(
+        {
+            "feature": ["P-PDG", "T-TPT", "P-TPT", "QGL", "T-JUS-CKP"],
+            "shap_value": [0.42, 0.18, 0.14, 0.11, 0.09],
+        }
+    )
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.barh(shap_values["feature"], shap_values["shap_value"], color="#E45756")
+    ax.set_title("SHAP Summary")
+    ax.set_xlabel("Mean Absolute SHAP Value")
+    plt.tight_layout()
+    fig.savefig(output_dir / "shap_summary.png", dpi=200)
+    plt.close(fig)
+
     summary_text = """Sample report summary:\nThis repository includes a reproducible workflow for anomaly detection in oil well time-series data.\nThe current example demonstrates the structure of the evaluation and alerting outputs."""
     (output_dir / "sample_report_summary.txt").write_text(summary_text, encoding="utf-8")
 
